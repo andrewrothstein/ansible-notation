@@ -1,0 +1,13 @@
+---
+# vars file for notation
+notation_os: '{{ ansible_system | lower }}'
+notation_arch: '{{ notation_arch_map[ansible_architecture] }}'
+notation_platform: '{{ notation_os }}_{{ notation_arch }}'
+notation_prefix: notation_{{ notation_ver }}_{{ notation_platform }}
+notation_archive: '{{ notation_prefix }}.{{ notation_archive_type | default("tar.gz") }}'
+notation_url: '{{ notation_mirror }}/v{{ notation_ver }}/{{ notation_archive }}'
+notation_checksum: '{{ notation_checksums[notation_ver][notation_platform] }}'
+notation_tmp_archive: '{{ notation_tmp_dir | default("/tmp") }}/{{ notation_archive }}'
+notation_install_dir: '{{ notation_parent_install_dir }}/{{ notation_prefix }}'
+notation_install_exe: '{{ notation_install_dir }}/notation'
+notation_install_link: '{{ notation_parent_install_dir }}/bin/notation'

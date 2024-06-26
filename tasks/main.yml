@@ -1,0 +1,60 @@
+---
+- name: Resolve platform specific vars
+  ansible.builtin.include_vars: '{{ item }}'
+  with_first_found:
+    - files:
+        - '{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml'
+        - '{{ ansible_distribution }}.yml'
+        - '{{ ansible_os_family }}.yml'
+      skip: true
+      paths:
+        - '{{ role_path }}/vars'
+- name: Look for install in {{ notation_install_exe }}
+  become: true
+  ansible.builtin.stat:
+    path: '{{ notation_install_exe }}'
+  changed_when: false
+  register: notation_binary
+- name: Downloading and installing notation
+  when: not notation_binary.stat.exists
+  block:
+    - name: Downloading {{ notation_url }} to {{ notation_tmp_archive }}
+      become: true
+      become_user: root
+      ansible.builtin.get_url:
+        url: '{{ notation_url }}'
+        dest: '{{ notation_tmp_archive }}'
+        checksum: '{{ notation_checksum }}'
+        mode: '644'
+    - name: Mkdir {{ notation_install_dir }}
+      become: true
+      become_user: root
+      ansible.builtin.file:
+        path: '{{ notation_install_dir }}'
+        state: directory
+        mode: '755'
+    - name: Installing andrewrothstein.unarchivedeps
+      ansible.builtin.include_role:
+        name: andrewrothstein.unarchivedeps
+    - name: Unarchiving {{ notation_tmp_archive }} to {{ notation_install_dir }}
+      become: true
+      become_user: root
+      ansible.builtin.unarchive:
+        remote_src: true
+        src: '{{ notation_tmp_archive }}'
+        dest: '{{ notation_install_dir }}'
+        creates: '{{ notation_install_exe }}'
+  always:
+    - name: Rm {{ notation_tmp_archive }}
+      become: true
+      become_user: root
+      ansible.builtin.file:
+        path: '{{ notation_tmp_archive }}'
+        state: absent
+- name: Linking {{ notation_install_exe }} to {{ notation_install_link }}
+  become: true
+  become_user: root
+  ansible.builtin.file:
+    src: '{{ notation_install_exe }}'
+    dest: '{{ notation_install_link }}'
+    state: link

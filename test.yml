@@ -1,0 +1,14 @@
+---
+- name: Testing andrewrothstein.notation role
+  hosts: all
+  tasks:
+    - name: Installing andrewrothstein.notation
+      ansible.builtin.include_role:
+        name: '{{ playbook_dir }}'
+    - name: Executing 'notation version'
+      ansible.builtin.command: notation version
+      changed_when: false
+      register: 'notation_test_output'
+    - name: Output from 'notation version'
+      ansible.builtin.debug:
+        msg: '{{ notation_test_output.stdout }}'
