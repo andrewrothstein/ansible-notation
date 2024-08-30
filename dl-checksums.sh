@@ -43,4 +43,4 @@ dl_ver() {
     dl $ver $lhashes windows amd64 zip
 }
 
-dl_ver ${1:-1.1.1}
+dl_ver ${1:-1.2.0}

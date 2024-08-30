@@ -1,6 +1,6 @@
 ---
 # defaults file for notation
-notation_ver: 1.1.1
+notation_ver: 1.2.0
 notation_mirror: https://github.com/notaryproject/notation/releases/download
 notation_arch_map:
   aarch64: arm64
@@ -20,3 +20,15 @@ notation_checksums:
     linux_arm64: sha256:f035db321a112887dac1c2e7e9d0f60afa2e332174ab956ea6a901fc5488a218
     # https://github.com/notaryproject/notation/releases/download/v1.1.1/notation_1.1.1_windows_amd64.zip
     windows_amd64: sha256:bf4e928f43409b8b2ce640dc284f847b6de4e02c53f60b3171298bc28b296258
+  # https://github.com/notaryproject/notation/releases/download/v1.2.0/notation_1.2.0_checksums.txt
+  '1.2.0':
+    # https://github.com/notaryproject/notation/releases/download/v1.2.0/notation_1.2.0_darwin_amd64.tar.gz
+    darwin_amd64: sha256:91c7a157aea38a5a628ec1a2094d7b2ad9f75e6a9e22b9dce095a06a70bb6d76
+    # https://github.com/notaryproject/notation/releases/download/v1.2.0/notation_1.2.0_darwin_arm64.tar.gz
+    darwin_arm64: sha256:992628c821fa0461fa0d70e611a5fb25435ce974f0578095e94412bbd935a24a
+    # https://github.com/notaryproject/notation/releases/download/v1.2.0/notation_1.2.0_linux_amd64.tar.gz
+    linux_amd64: sha256:f781f0652adc633798fc1e1db12732d0b53e34d87d4bd2752c72b6bbed967bac
+    # https://github.com/notaryproject/notation/releases/download/v1.2.0/notation_1.2.0_linux_arm64.tar.gz
+    linux_arm64: sha256:b5c6569630289a491149862d584b001c254707ea908c843843535d478061da3c
+    # https://github.com/notaryproject/notation/releases/download/v1.2.0/notation_1.2.0_windows_amd64.zip
+    windows_amd64: sha256:43e8d3ddc5b1d9a4a1992615fc7d4f2dabd03e77654d46c76c30e4650a2230a5
